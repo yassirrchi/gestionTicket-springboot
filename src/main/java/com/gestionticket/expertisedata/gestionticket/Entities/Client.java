@@ -13,7 +13,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@DiscriminatorValue("CLI")
 @Entity
 public class Client extends Utilisateur {
     @OneToMany(mappedBy = "client",cascade= CascadeType.REMOVE)

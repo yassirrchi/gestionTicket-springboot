@@ -13,4 +13,5 @@ public interface UserRepository extends JpaRepository<Utilisateur,Long> {
      // List<Utilisateur> findAllAdmins();
    // List<Administrateur> findAllBy
 
+
 }

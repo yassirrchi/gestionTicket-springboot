@@ -10,11 +10,11 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Inheritance(strategy =InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="TYPE",length=4)
-public  class Utilisateur {
+@Inheritance(strategy =InheritanceType.TABLE_PER_CLASS)
+
+public  abstract  class Utilisateur {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.AUTO )
     private Long Id;
     private String username;
 
