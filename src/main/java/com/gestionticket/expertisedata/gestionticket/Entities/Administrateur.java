@@ -11,6 +11,6 @@ import java.util.List;
 @Data
 
 @Entity
-public    class Administrateur extends Utilisateur {
+public  class Administrateur extends Utilisateur {
 private int tasksAssigned;
 }

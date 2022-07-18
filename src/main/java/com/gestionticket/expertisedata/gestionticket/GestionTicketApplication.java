@@ -63,6 +63,7 @@ public class GestionTicketApplication {
                     traitement.setClientDetails("blabla");
                     traitement.setStatus(Math.random() > 0.5 ?"en cours":"cloture");
                     traitement.setTechnicien(technicien);
+                    traitement.setEdited(false);
                     traitementRepository.save(traitement);
 
 

@@ -16,6 +16,8 @@ public class Traitement {
     private Long id;
     private Date CreatedAt;
     private String ClientDetails;
+    private Long TicketId;
+    private  boolean isEdited;
     private String TechnicienDetails;
     private String Status; //resolved/ en cours/ rejetee / if changed the status of Ticket changes too
     @ManyToOne(cascade=CascadeType.REMOVE)
