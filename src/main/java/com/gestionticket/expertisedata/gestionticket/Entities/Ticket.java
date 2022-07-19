@@ -18,6 +18,7 @@ public class Ticket {
     private Long id;
     private String Sujet;
     private String Description;
+    private boolean isEdited;
     private Date CreatedAt;
     private String CreatedBy;
     private String Status;

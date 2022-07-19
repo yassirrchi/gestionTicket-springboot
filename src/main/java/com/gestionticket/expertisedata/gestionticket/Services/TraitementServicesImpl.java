@@ -1,11 +1,16 @@
 package com.gestionticket.expertisedata.gestionticket.Services;
 
+import com.gestionticket.expertisedata.gestionticket.Entities.Technicien;
+import com.gestionticket.expertisedata.gestionticket.Entities.Ticket;
 import com.gestionticket.expertisedata.gestionticket.Entities.Traitement;
+import com.gestionticket.expertisedata.gestionticket.Repositories.TechnicienRepo;
+import com.gestionticket.expertisedata.gestionticket.Repositories.TicketRepository;
 import com.gestionticket.expertisedata.gestionticket.Repositories.TraitementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -13,6 +18,10 @@ import java.util.List;
 public class TraitementServicesImpl implements TraitementServices{
     @Autowired
     private TraitementRepository traitementRepo;
+    @Autowired
+    private TicketRepository ticketRepo;
+    @Autowired
+    private TechnicienRepo technicienRepo;
 
     @Override
     public List<Traitement> getAllTraitements() {
@@ -27,6 +36,20 @@ public class TraitementServicesImpl implements TraitementServices{
         //traitement.sujet=ticket.sujet ...
         //traitement.technicien=technicien
         //traitement repo.save(traitemnt)
+        Ticket ticket=ticketRepo.findById(ticketId).orElse(null);
+        if(ticket==null)
+            System.out.println("ticket not found");
+        Technicien technicien=technicienRepo.findById(technicienid).orElse(null);
+        if(technicien==null)
+            System.out.println("technicien not found");
+        Traitement traitement=new Traitement();
+        traitement.setEdited(false);
+        traitement.setStatus("en cours asidi"+technicien.getUsername());
+        traitement.setCreatedAt(new Date());
+        traitement.setTechnicien(technicien);
+        traitementRepo.save(traitement);
+
+
     }
 
 
