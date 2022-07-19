@@ -60,6 +60,16 @@ public class TraitementServicesImpl implements TraitementServices{
         //traitement.state(state) ticket.state(state) [ticketservice.changeTicketState]
         //traitmntrepo.save(traitement)
         //ticketrepo.save(ticket)
+       // System.out.println("ticket id is "+TicketId+" traitement id is "+TraitemetId+" state is "+state);
+
+        Traitement traitement=traitementRepo.findById(TraitemetId).orElse(null);
+        Ticket ticket=ticketRepo.findById(traitement.getTicketId()).orElse(null);
+        traitement.setStatus(state);
+        traitement.setEdited(true);
+        ticket.setStatus(state);
+        ticket.setEdited(true);
+        traitementRepo.save(traitement);
+        ticketRepo.save(ticket);
 
     }
 

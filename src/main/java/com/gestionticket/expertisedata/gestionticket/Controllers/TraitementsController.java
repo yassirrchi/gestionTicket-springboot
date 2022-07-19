@@ -2,6 +2,7 @@ package com.gestionticket.expertisedata.gestionticket.Controllers;
 
 import com.gestionticket.expertisedata.gestionticket.Entities.Traitement;
 import com.gestionticket.expertisedata.gestionticket.Parser.TicketToTraitement;
+import com.gestionticket.expertisedata.gestionticket.Parser.changeTraitementState;
 import com.gestionticket.expertisedata.gestionticket.Services.TraitementServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,10 @@ public class TraitementsController {
         traitementServices.createTraitement(ticketToTraitement.getTicketId(), ticketToTraitement.getTechnicienId());
     }
     @PutMapping("/traitement/edit") //technicien
-    public void editTraitementState(){
-        //work only if traitement.isEdited is false
+    public void editTraitementState(@RequestBody changeTraitementState changeTraitementState){
+         //System.out.println(changeTraitementState.getTicketId()+" "+ changeTraitementState.getTraitementId()+" "+changeTraitementState.getState());
+
+        traitementServices.changeTraitementState(changeTraitementState.getState(),changeTraitementState.getTraitementId());
     }
 
 }
