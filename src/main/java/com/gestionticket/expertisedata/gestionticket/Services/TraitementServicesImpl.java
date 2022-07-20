@@ -44,7 +44,7 @@ public class TraitementServicesImpl implements TraitementServices{
             System.out.println("technicien not found");
         Traitement traitement=new Traitement();
         traitement.setEdited(false);
-        traitement.setStatus("en cours asidi"+technicien.getUsername());
+        traitement.setStatus("en cours asidi hsjhhjhwkhd"+technicien.getUsername());
         traitement.setCreatedAt(new Date());
         traitement.setTechnicien(technicien);
         traitementRepo.save(traitement);
@@ -76,5 +76,11 @@ public class TraitementServicesImpl implements TraitementServices{
     @Override
     public Traitement getTraitementById(Long id) {
         return traitementRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Traitement> getTraitementsByTechnicien(Long technicienId) {
+
+        return traitementRepo.findTraitementByTechnicienId(technicienId);
     }
 }

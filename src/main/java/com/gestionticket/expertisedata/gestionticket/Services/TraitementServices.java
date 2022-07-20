@@ -9,4 +9,5 @@ public interface TraitementServices {
     public void createTraitement(long ticketId,long technicienid);
     public void changeTraitementState(String state,Long TraitemetId);
     public  Traitement getTraitementById(Long id);
+    public List<Traitement> getTraitementsByTechnicien(Long technicienId);
 }

@@ -12,10 +12,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Inheritance(strategy =InheritanceType.TABLE_PER_CLASS)
 
-public  abstract  class Utilisateur {
+public  class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO )
-    private Long Id;
+    private Long id;
     private String username;
 
     private String email;

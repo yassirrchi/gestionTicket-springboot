@@ -24,7 +24,7 @@ public class UsersController {
     public List<Administrateur> getAdmins(){
         return userServices.getAdministrators();
     }
-    @GetMapping("/techniciens")
+    @GetMapping("/techniciens")//admin
     public List<Technicien> getTechniciens(){
         return userServices.getTechniciens();
     }

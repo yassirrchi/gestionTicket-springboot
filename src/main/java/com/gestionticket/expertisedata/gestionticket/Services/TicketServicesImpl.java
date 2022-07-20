@@ -37,5 +37,10 @@ public class TicketServicesImpl implements  TicketServices{
         return ticketRepo.findById(ticketId).orElse(null);
     }
 
+    @Override
+    public List<Ticket> getClientTickets(Long id) {
+        return ticketRepo.findTicketByClientId(id);
+    }
+
 
 }

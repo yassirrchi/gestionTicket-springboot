@@ -9,4 +9,5 @@ public interface TicketServices {
     public void CreateTicket();
     public void ChangeTicketState(String state,Long ticketId);
     public Ticket GetTicketById(Long ticketId);
+    public List<Ticket> getClientTickets(Long id);
 }

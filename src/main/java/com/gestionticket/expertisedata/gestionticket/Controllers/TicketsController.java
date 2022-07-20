@@ -37,5 +37,10 @@ public class TicketsController {
     public void updateTicket(){
         //only works if state is non traite
     }
+    @GetMapping("/tickets/client/{id}")
+    public  List<Ticket> clientTickets(@PathVariable Long id){
+        return ticketServices.getClientTickets(id);
+
+    }
 
 }

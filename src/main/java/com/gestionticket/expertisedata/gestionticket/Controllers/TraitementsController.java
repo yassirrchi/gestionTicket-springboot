@@ -25,7 +25,7 @@ public class TraitementsController {
     }
     @PostMapping("/traitement/create") //technicien
     public void createTraitement(@RequestBody TicketToTraitement ticketToTraitement){
-       // System.out.println(ticketToTraitement.getTicketId()+" "+ ticketToTraitement.getTechnicienId());
+        //System.out.println(ticketToTraitement.getTicketId()+" "+ ticketToTraitement.getTechnicienId());
         traitementServices.createTraitement(ticketToTraitement.getTicketId(), ticketToTraitement.getTechnicienId());
     }
     @PutMapping("/traitement/edit") //technicien
@@ -33,6 +33,10 @@ public class TraitementsController {
          //System.out.println(changeTraitementState.getTicketId()+" "+ changeTraitementState.getTraitementId()+" "+changeTraitementState.getState());
 
         traitementServices.changeTraitementState(changeTraitementState.getState(),changeTraitementState.getTraitementId());
+    }
+    @GetMapping("/traitements/technicien/{id}")
+    public List<Traitement> getTraitementByTechnicien(@PathVariable Long id){
+        return traitementServices.getTraitementsByTechnicien(id);
     }
 
 }
