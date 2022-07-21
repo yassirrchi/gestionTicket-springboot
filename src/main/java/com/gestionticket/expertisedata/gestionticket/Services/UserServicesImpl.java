@@ -36,6 +36,38 @@ public class UserServicesImpl implements  UserServices{
         return clientRepo.findAll();
     }
 
+    @Override
+    public Client findClientByUsername(String username) {
+        return clientRepo.findClientByUsername(username);
+    }
+
+    @Override
+    public Client CreateClient(Client client) {
+        Client newClient=new Client();
+        newClient.setEmail(client.getEmail());
+        newClient.setUsername(client.getUsername());
+        newClient.setPassword(client.getPassword());
+        return clientRepo.save(newClient);
+    }
+
+    @Override
+    public Technicien findTechnicienByUsername(String username) {
+        return technicienRepo.findTechnicienByUsername(username);
+    }
+
+    @Override
+    public Technicien createTechnicien(Technicien technicien) {
+        Technicien newTechnicien=new Technicien();
+        newTechnicien.setEmail(technicien.getEmail());
+        newTechnicien.setUsername(technicien.getUsername());
+        newTechnicien.setPassword(technicien.getPassword());
+        return technicienRepo.save(newTechnicien);
+    }
+
+    @Override
+    public Administrateur findAdminByUsername(String username) {
+        return adminRepo.findAdministrateurByUsername(username);
+    }
 
 
 }

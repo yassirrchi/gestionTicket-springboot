@@ -34,7 +34,7 @@ public class TicketsController {
         ticketServices.CreateTicket();
     }
     @PutMapping //client
-    public void updateTicket(){
+    public void updateTicket(@RequestBody  Ticket ticket){
         //only works if state is non traite
     }
     @GetMapping("/tickets/client/{id}")

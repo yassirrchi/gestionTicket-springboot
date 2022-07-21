@@ -27,10 +27,11 @@ public class GestionTicketApplication {
 
 
 
-            Stream.of("Hassan", "Aicha").forEach(
+            Stream.of("hassan", "aicha").forEach(
                     name -> {
                         Administrateur utilisateur = new Administrateur();
                         utilisateur.setUsername(name);
+                        utilisateur.setPassword("1234");
 
                         utilisateur.setEmail(name + "@mail.xt");
                         adminRepo.save(utilisateur);
@@ -38,19 +39,21 @@ public class GestionTicketApplication {
                     }
 
             );
-            Stream.of("Ayoub", "Yassir", "hasbulla").forEach(
+            Stream.of("ayoub", "yassir", "hasbulla").forEach(
                     name -> {
                         Technicien  utilisateur = new Technicien();
                         utilisateur.setUsername(name);
+                        utilisateur.setPassword("1234");
 
                         utilisateur.setEmail(name + "@mail.xt");
                         technicienRepo.save(utilisateur);
 
                     } );
-            Stream.of("Wassim", "Yassir3", "hasbulla", "Ayoub2").forEach(
+            Stream.of("wassim", "yassir3", "hasbulla", "ayoub2").forEach(
                     name -> {
                         Client utilisateur = new Client();
                         utilisateur.setUsername(name);
+                        utilisateur.setPassword("123");
 
                         utilisateur.setEmail(name + "@mail.xt");
                         clientRepo.save(utilisateur);
