@@ -28,10 +28,15 @@ public class TicketsController {
         return ticketServices.GetTicketById(id);
 
     }
-    @PostMapping //client
-    public void createTicket(){
+    @PostMapping("/ticket/create") //client
+    public void createTicket(@RequestBody Ticket ticket){
+        System.out.println(ticket.getDescription()+" "+ticket.getSujet());
+        System.out.println("id client: "+ ticket.getClient().getId());
+
+        ticketServices.CreateTicket(ticket.getSujet(),ticket.getDescription(),ticket.getClient().getId());
         //parameters to be updated
-        ticketServices.CreateTicket();
+
+       // ticketServices.CreateTicket();
     }
     @PutMapping //client
     public void updateTicket(@RequestBody  Ticket ticket){

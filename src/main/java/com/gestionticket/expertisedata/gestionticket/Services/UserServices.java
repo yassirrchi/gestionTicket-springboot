@@ -11,6 +11,7 @@ public interface UserServices {
     public List<Technicien> getTechniciens();
     public List<Client> getClients();
     public Client findClientByUsername(String username);
+    public Client findClientById(Long id);
     public Client CreateClient(Client client);
     public Technicien findTechnicienByUsername(String username);
     public Technicien createTechnicien(Technicien technicien);

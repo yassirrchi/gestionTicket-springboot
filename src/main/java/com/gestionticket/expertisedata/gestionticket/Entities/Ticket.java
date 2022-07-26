@@ -22,7 +22,7 @@ public class Ticket {
     private Date CreatedAt;
     private String CreatedBy;
     private String Status;
-    private byte Priorite;
+    private int Priorite;
     @ManyToOne(cascade=CascadeType.REMOVE)
     private Utilisateur client;
 

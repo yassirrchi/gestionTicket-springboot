@@ -44,8 +44,10 @@ public class TraitementServicesImpl implements TraitementServices{
             System.out.println("technicien not found");
         Traitement traitement=new Traitement();
         traitement.setEdited(false);
-        traitement.setStatus("en cours asidi hsjhhjhwkhd"+technicien.getUsername());
+        ticket.setStatus("en cours");
+        traitement.setStatus("en cours");
         traitement.setCreatedAt(new Date());
+        traitement.setTicketId(ticketId);
         traitement.setTechnicien(technicien);
         traitementRepo.save(traitement);
 

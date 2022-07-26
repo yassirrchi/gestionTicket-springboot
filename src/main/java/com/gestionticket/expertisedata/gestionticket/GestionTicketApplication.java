@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
@@ -22,6 +23,7 @@ public class GestionTicketApplication {
 @Bean
     CommandLineRunner start(UserRepository UserRepo, ClientRepo clientRepo, AdminRepo adminRepo,TraitementRepository traitementRepository, TechnicienRepo technicienRepo, TicketRepository ticketRepository) {
         return args -> {
+            Random random=new Random();
 
 
 
@@ -32,6 +34,7 @@ public class GestionTicketApplication {
                         Administrateur utilisateur = new Administrateur();
                         utilisateur.setUsername(name);
                         utilisateur.setPassword("1234");
+                        utilisateur.setRole("ADMIN");
 
                         utilisateur.setEmail(name + "@mail.xt");
                         adminRepo.save(utilisateur);
@@ -39,22 +42,23 @@ public class GestionTicketApplication {
                     }
 
             );
-            Stream.of("ayoub", "yassir", "hasbulla").forEach(
+            Stream.of("ayoub", "yassir", "amine").forEach(
                     name -> {
                         Technicien  utilisateur = new Technicien();
                         utilisateur.setUsername(name);
                         utilisateur.setPassword("1234");
+                        utilisateur.setRole("TECHNICIEN");
 
                         utilisateur.setEmail(name + "@mail.xt");
                         technicienRepo.save(utilisateur);
 
                     } );
-            Stream.of("wassim", "yassir3", "hasbulla", "ayoub2").forEach(
+            Stream.of("wassim", "yassir3", "amine", "ayoub2").forEach(
                     name -> {
                         Client utilisateur = new Client();
                         utilisateur.setUsername(name);
                         utilisateur.setPassword("123");
-
+                        utilisateur.setRole("CLIENT");
                         utilisateur.setEmail(name + "@mail.xt");
                         clientRepo.save(utilisateur);
 
@@ -64,7 +68,7 @@ public class GestionTicketApplication {
                     Traitement traitement=new Traitement();
                     traitement.setCreatedAt(new Date());
                     traitement.setClientDetails("blabla");
-                    traitement.setStatus(Math.random() > 0.5 ?"en cours":"cloture");
+                    traitement.setStatus("en cours");
                     traitement.setTechnicien(technicien);
                     traitement.setEdited(false);
                     traitement.setTicketId(3L);
@@ -84,6 +88,9 @@ public class GestionTicketApplication {
                     Ticket ticket=new Ticket();
                     ticket.setDescription("bla bla");
                     ticket.setSujet("sujet"+i);
+                    ticket.setStatus(Math.random() > 0.5 ?"non traite":"en cours");
+
+                    ticket.setPriorite(random.nextInt((3 - 1) + 1) + 1);
                     ticket.setCreatedAt(new Date());
                     ticket.setClient(client);
                     ticketRepository.save(ticket);

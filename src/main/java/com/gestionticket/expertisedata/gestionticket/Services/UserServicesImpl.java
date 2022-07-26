@@ -42,6 +42,11 @@ public class UserServicesImpl implements  UserServices{
     }
 
     @Override
+    public Client findClientById(Long id) {
+        return clientRepo.findById(id).orElse(null);
+    }
+
+    @Override
     public Client CreateClient(Client client) {
         Client newClient=new Client();
         newClient.setEmail(client.getEmail());
