@@ -34,53 +34,67 @@ public class UsersController {
         return userServices.getClients();
     }
 
-    //client Login/Signup
-    @PostMapping("client/login")
-    public ResponseEntity<?> clientLogin(@RequestBody Utilisateur user){
-        Client client=userServices.findClientByUsername(user.getUsername());
-        if(client==null)
-            return (ResponseEntity<?>) ResponseEntity.notFound();
-        if(client.getPassword().equals(user.getPassword()))
-            return ResponseEntity.ok(client);
-        return (ResponseEntity<?>) ResponseEntity.status(401);
-    }
-    @PostMapping("client/signup")
-    public ResponseEntity<?> clientSignup(@RequestBody Client user){
-
-        return ResponseEntity.ok(userServices.CreateClient(user));
-
-    }
-    //Technicien Login/create                  //signin for technicien //create for admin
-    @PostMapping("technicien/login")
-    public ResponseEntity<?> TechnicienLogin(@RequestBody Utilisateur user){
-        Technicien technicien=userServices.findTechnicienByUsername(user.getUsername());
-        if(technicien==null)
-            return (ResponseEntity<?>) ResponseEntity.notFound();
-        if(technicien.getPassword().equals(user.getPassword()))
-            return ResponseEntity.ok(technicien);
-        return (ResponseEntity<?>) ResponseEntity.status(401);
-    }
-    @PostMapping("technicien/create")
-    public ResponseEntity<?> createTechnicien(@RequestBody  Technicien technicien){
-
-
-        return  ResponseEntity.ok(userServices.createTechnicien(technicien));
-    }
-    //admin login
-    @PostMapping("/admin/login")
-    public ResponseEntity<?> adminLogin(@RequestBody Administrateur administrateur){
-        Administrateur Admin=userServices.findAdminByUsername(administrateur.getUsername());
-        if(Admin==null)
-            return (ResponseEntity<?>) ResponseEntity.notFound();
-        if(Admin.getPassword().equals(administrateur.getPassword()))
-            return ResponseEntity.ok(Admin);
-        return (ResponseEntity<?>) ResponseEntity.status(401);
-
-
-    }
 
 @GetMapping("test/{username}")
     public Technicien getTechno(@PathVariable String username){
         return  userServices.findTechnicienByUsername(username);
 }
+@DeleteMapping("user/delete/{id}/{role}")
+    public  void deleteUser(@PathVariable Long id,@PathVariable String role){
+        userServices.deleteUser(id,role);
+
+
+
+}
+    @PostMapping("user/login")
+    public ResponseEntity<?> userLogin(@RequestBody Utilisateur user){
+
+        if (user.getRole().equals("CLIENT")){
+            Client client=userServices.findClientByUsername(user.getUsername());
+            if(client==null)
+                return (ResponseEntity<?>) ResponseEntity.notFound();
+            if(client.getPassword().equals(user.getPassword()))
+                return ResponseEntity.ok(client);
+
+        }
+        if(user.getRole().equals("TECHNICIEN")){
+            Technicien technicien=userServices.findTechnicienByUsername(user.getUsername());
+            if(technicien==null)
+                return (ResponseEntity<?>) ResponseEntity.notFound();
+            if(technicien.getPassword().equals(user.getPassword()))
+                return ResponseEntity.ok(technicien);
+
+        }
+        if(user.getRole().equals("ADMIN")){
+            Administrateur Admin=userServices.findAdminByUsername(user.getUsername());
+            if(Admin==null)
+                return (ResponseEntity<?>) ResponseEntity.notFound();
+            if(Admin.getPassword().equals(user.getPassword()))
+                return ResponseEntity.ok(Admin);
+         }
+
+
+
+        return (ResponseEntity<?>) ResponseEntity.status(401);
+    }
+
+    @PostMapping("user/create")
+    public ResponseEntity<?> createUser(@RequestBody Utilisateur user){
+
+        if (user.getRole().equals("CLIENT"))
+            return ResponseEntity.ok(userServices.CreateClient(user));
+        else if (user.getRole().equals("TECHNICIEN"))
+            return  ResponseEntity.ok(userServices.createTechnicien(user));
+        else
+            return  ResponseEntity.ok(userServices.CreateAdmin(user));
+
+
+
+    }
+
+
+
+
+
+
 }

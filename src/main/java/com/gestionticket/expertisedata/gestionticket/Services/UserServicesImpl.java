@@ -3,6 +3,7 @@ package com.gestionticket.expertisedata.gestionticket.Services;
 import com.gestionticket.expertisedata.gestionticket.Entities.Administrateur;
 import com.gestionticket.expertisedata.gestionticket.Entities.Client;
 import com.gestionticket.expertisedata.gestionticket.Entities.Technicien;
+import com.gestionticket.expertisedata.gestionticket.Entities.Utilisateur;
 import com.gestionticket.expertisedata.gestionticket.Repositories.AdminRepo;
 import com.gestionticket.expertisedata.gestionticket.Repositories.ClientRepo;
 import com.gestionticket.expertisedata.gestionticket.Repositories.TechnicienRepo;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 @Service
 @Transactional
@@ -47,10 +49,12 @@ public class UserServicesImpl implements  UserServices{
     }
 
     @Override
-    public Client CreateClient(Client client) {
+    public Client CreateClient(Utilisateur client) {
         Client newClient=new Client();
         newClient.setEmail(client.getEmail());
         newClient.setUsername(client.getUsername());
+        newClient.setRole("CLIENT");
+        newClient.setCreatedAt(new Date());
         newClient.setPassword(client.getPassword());
         return clientRepo.save(newClient);
     }
@@ -61,17 +65,44 @@ public class UserServicesImpl implements  UserServices{
     }
 
     @Override
-    public Technicien createTechnicien(Technicien technicien) {
+    public Technicien createTechnicien(Utilisateur technicien) {
         Technicien newTechnicien=new Technicien();
         newTechnicien.setEmail(technicien.getEmail());
         newTechnicien.setUsername(technicien.getUsername());
         newTechnicien.setPassword(technicien.getPassword());
+        newTechnicien.setRole("TECHNICIEN");
+        newTechnicien.setCreatedAt(new Date());
         return technicienRepo.save(newTechnicien);
+    }
+
+    @Override
+    public Administrateur CreateAdmin(Utilisateur administrateur) {
+        Administrateur newAdmin=new Administrateur();
+        newAdmin.setEmail(administrateur.getEmail());
+        newAdmin.setUsername(administrateur.getUsername());
+        newAdmin.setPassword(administrateur.getPassword());
+        newAdmin.setRole("ADMIN");
+        newAdmin.setCreatedAt(new Date());
+
+        return adminRepo.save(newAdmin);
     }
 
     @Override
     public Administrateur findAdminByUsername(String username) {
         return adminRepo.findAdministrateurByUsername(username);
+    }
+
+    @Override
+    public void deleteUser(Long id,String role) {
+        System.out.println(id+" "+role);
+        if(role.equals("ADMIN"))
+        adminRepo.deleteById(id);
+        if (role.equals("CLIENT"))
+            clientRepo.deleteById(id);
+        if(role.equals("TECHNICIEN"))
+            technicienRepo.deleteById(id);
+
+
     }
 
 

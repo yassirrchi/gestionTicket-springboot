@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
@@ -20,6 +21,8 @@ public  class Utilisateur {
     private String email;
     private String password;
     private String role;
+    private Date createdAt;
+    private boolean isActive;
 
 
 

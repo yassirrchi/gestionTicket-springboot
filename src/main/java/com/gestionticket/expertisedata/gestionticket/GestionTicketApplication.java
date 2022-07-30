@@ -35,6 +35,7 @@ public class GestionTicketApplication {
                         utilisateur.setUsername(name);
                         utilisateur.setPassword("1234");
                         utilisateur.setRole("ADMIN");
+                        utilisateur.setCreatedAt(new Date());
 
                         utilisateur.setEmail(name + "@mail.xt");
                         adminRepo.save(utilisateur);
@@ -48,6 +49,7 @@ public class GestionTicketApplication {
                         utilisateur.setUsername(name);
                         utilisateur.setPassword("1234");
                         utilisateur.setRole("TECHNICIEN");
+                        utilisateur.setCreatedAt(new Date());
 
                         utilisateur.setEmail(name + "@mail.xt");
                         technicienRepo.save(utilisateur);
@@ -59,6 +61,7 @@ public class GestionTicketApplication {
                         utilisateur.setUsername(name);
                         utilisateur.setPassword("123");
                         utilisateur.setRole("CLIENT");
+                        utilisateur.setCreatedAt(new Date());
                         utilisateur.setEmail(name + "@mail.xt");
                         clientRepo.save(utilisateur);
 
@@ -87,7 +90,7 @@ public class GestionTicketApplication {
                 for (int i = 0; i < 5; i++) {
                     Ticket ticket=new Ticket();
                     ticket.setDescription("bla bla");
-                    ticket.setSujet("sujet"+i);
+                    ticket.setSujet("generated subject "+i);
                     ticket.setStatus(Math.random() > 0.5 ?"non traite":"en cours");
 
                     ticket.setPriorite(random.nextInt((3 - 1) + 1) + 1);
