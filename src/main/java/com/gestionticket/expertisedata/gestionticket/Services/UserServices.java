@@ -19,5 +19,6 @@ public interface UserServices {
     public Administrateur CreateAdmin(Utilisateur administrateur);
     public Administrateur findAdminByUsername(String username);
     public void deleteUser(Long id,String role);
+    public Utilisateur createUser(Utilisateur utilisateur);
 
 }

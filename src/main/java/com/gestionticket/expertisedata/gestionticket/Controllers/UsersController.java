@@ -80,6 +80,7 @@ public class UsersController {
 
     @PostMapping("user/create")
     public ResponseEntity<?> createUser(@RequestBody Utilisateur user){
+        System.out.println(890);
 
         if (user.getRole().equals("CLIENT"))
             return ResponseEntity.ok(userServices.CreateClient(user));
@@ -87,6 +88,8 @@ public class UsersController {
             return  ResponseEntity.ok(userServices.createTechnicien(user));
         else
             return  ResponseEntity.ok(userServices.CreateAdmin(user));
+
+
 
 
 

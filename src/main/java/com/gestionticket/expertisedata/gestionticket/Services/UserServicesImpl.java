@@ -105,5 +105,33 @@ public class UserServicesImpl implements  UserServices{
 
     }
 
+    @Override
+    public Utilisateur createUser(Utilisateur utilisateur) {
+        System.out.println(utilisateur.getRole()+" "+utilisateur.getUsername()+" "+utilisateur.getPassword());
+        Utilisateur newUser=new Utilisateur();
+        newUser.setEmail(utilisateur.getEmail());
+        newUser.setUsername(utilisateur.getUsername());
+        newUser.setCreatedAt(new Date());
+        newUser.setPassword(utilisateur.getPassword());
+        System.out.println("  hhhhh "+(Client)newUser);
+
+        if (utilisateur.getRole().equals("CLIENT")){
+            newUser.setRole("CLIENT");
+            return clientRepo.save((Client) newUser);
+
+        }
+        else if (utilisateur.getRole().equals("TECHNICIEN")){
+            newUser.setRole("TECHNICIEN");
+            return technicienRepo.save((Technicien) newUser);
+
+        }
+        else {
+            newUser.setRole("ADMIN");
+            return adminRepo.save((Administrateur) newUser);
+
+        }
+
+    }
+
 
 }
